@@ -1,12 +1,21 @@
 const express = require('express'); 
-/*
- Imports the express library.
- This is necessary to have an express server.
-*/
-const bodyParser = require('body-parser');  // Node.js body parsing middleware.
+const sha1 = require("sha1");
 
-const app = express(); // Creates an app for your servers client
+const bodyParser = require('body-parser');
 
-app.use(express.static('public')); // load the files that are in the public directory
+const app = express();
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static('public'));
+
+app.get("/signup/:email", (req, res) => {
+  //receive email, form a link, send email with the link
+  let email = req.params.email;
+  console.log(email)
+  res.json({"success": email});
+})
 
 app.listen(3000, () => console.log('server started'));

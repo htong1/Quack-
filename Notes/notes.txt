@@ -1,0 +1,27 @@
+Project Outline
+
+ Roles:
+  A. User: any human who uses the platform
+  B. System: occurs behind the scenes
+ 
+ User cases:
+  A. user signup
+  B. user changes/reset password
+  C. profile setup
+    a. nickname, contact info, bio, etc.
+  D. user finds other users
+  E. User follows others
+  F. user retrieves feed from followed users
+  G. user ikes 
+  H. user retweets
+  I. user comments
+  J. POSTING
+  K. Friend users
+  L. Number of followers
+
+ System:
+  A. validates a signed up user's identity (ex. by email)
+  B. stores a user's credentials (username and password)
+  C. stores posts
+  D. recommendations
+  E. sends email with system account (no reply)

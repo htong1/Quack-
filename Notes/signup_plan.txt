@@ -1,0 +1,4 @@
+user provides email
+send an email with a link with user's email in the link
+set password and profile
+then the user can sign in

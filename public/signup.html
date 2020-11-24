@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+
+<h1>Welcome to Quack!</h1>
+<h6>Where 21st century quacking became a thing. </h6>
+<br>
+<br>
+<p>Please provide the information below to sign up!</p>
+<br>
+<br>
+<textarea id="email" rows="4" cols="50"></textarea>
+<br>
+<br>
+<button type = "button" onclick="signUp()"> Get Quacking</button>
+<br>
+<br>
+<div id="signupcomplete"></div>
+<script>
+
+function signUp(){
+let email = document.getElementById("email").value;
+let result = document.getElementById("signupcomplete");
+if (email.index < 1) alert("Please enter your full email.")
+if (email.indexOf("@") > 1 && email.lastIndexOf(".") > email.indexOf("@")) {
+result.innerHTML = "Please input a valid email address to continue." };
+let Yay = "/signup/" + email;
+    fetch(Yay)
+        .then((response) => response.json())
+
+        .then((res) => {
+            result.innerHTML = "An email was sent to " + res.success + ". Please verify your email to begin quacking!"
+        });
+}
+</script>
+</body>
+</html>
