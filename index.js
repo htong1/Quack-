@@ -14,8 +14,9 @@ app.use(express.static('public'));
 app.get("/signup/:email", (req, res) => {
   //receive email, form a link, send email with the link
   let email = req.params.email;
-  console.log(email)
+  console.log(email);
+  
   res.json({"success": email});
 })
 
-app.listen(3000, () => console.log('server started'));
+app.listen(3000, () => console.log('server started' + new Date()));

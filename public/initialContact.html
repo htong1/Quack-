@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		body {
+			background-color: lightblue;
+		}
+
+		h1 {
+			color: white;
+			text-align: center;
+			font-family: monospace;
+		}
+
+		p {
+			font-family: monospace;
+			font-size: 15px;
+			text-align: center;
+			color: white;
+		}
+
+		h4 {
+			color: white;
+			text-align: center;
+			font-family: monospace;
+		}
+
+		#email {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#quack {
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>Welcome to Quack!</h1>
+	<h4>Where 21st century quacking became a thing. </h4>
+	<br>
+<br>
+<p>Please provide the information below to sign up!</p>
+<br>
+<br>
+<p>Enter your email address below.</p>
+<textarea id="email" rows="2" cols="10"></textarea>
+<br>
+<br>
+<button type = "button" id = "quack" onclick="signUp()"> Get Quacking</button>
+<br>
+<br>
+<div id="signupcomplete"></div>
+<script>
+
+function signUp(){
+let email = document.getElementById("email").value;
+let result = document.getElementById("signupcomplete");
+if (email.indexOf("@") > 1 && email.lastIndexOf(".") > email.indexOf("@")) {
+  let url = "/signup/" + email;
+    fetch(url)
+        .then((response) => response.json())
+
+        .then((res) => {
+            result.innerHTML = "An email was sent to " + res.success + ". Please verify your email to begin quacking!"
+        });
+ } else {
+result.innerHTML = "Please input a valid email address to continue." 
+}
+}
+</script>
+</body>
+</html>

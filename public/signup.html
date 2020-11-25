@@ -1,54 +1,91 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body {
-  background-color: lightblue;
-}
+    <head>
+        <style>
+            body {
+                background-color: lightblue;
+            }
 
-h1 {
-  color: white;
-  text-align: center;
-}
+            h1 {
+                color: white;
+                text-align: center;
+            }
 
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-</style>
-</head>
-<body>
+            p {
+                font-family: verdana;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Become a Quack! :D</h1>
+        <p>This is a paragraph.</p>
+        First name:
+        <br />
+        <input type="text" name="First Name" onchange="checkFirstName(this)" />
 
-<h1>Welcome to Quack!</h1>
-<h6>Where 21st century quacking became a thing. </h6>
-<br>
-<br>
-<p>Please provide the information below to sign up!</p>
-<br>
-<br>
-<textarea id="email" rows="4" cols="50"></textarea>
-<br>
-<br>
-<button type = "button" onclick="signUp()"> Get Quacking</button>
-<br>
-<br>
-<div id="signupcomplete"></div>
-<script>
+        <br />
+        Last name:
+        <br />
+        <input type="text" name="Last Name" onchange="checkLastName(this)" />
+        <br />
+        Birthday (mm/dd/yy):
+        <br />
+        <input type="date" name="birthday" onchange="checkBirthday(this)" />
+        <br />
+        Password :
+        <br />
+        <input type="password" name="Password" onchange="checkPassword(this)" />
+        <script>
+            function checkFirstName(firstnameInput) {
+                if (firstnameInput.value.length < 2) {
+                    firstnameInput.focus();
+                    alert("Your name is too short:" + firstnameInput.value);
+                } else {
+                    firstnameInput.value = toProperCase(firstnameInput.value);
+                }
+                localStorage.setItem("firstname", firstnameInput.value);
+            }
 
-function signUp(){
-let email = document.getElementById("email").value;
-let result = document.getElementById("signupcomplete");
-if (email.index < 1) alert("Please enter your full email.")
-if (email.indexOf("@") > 1 && email.lastIndexOf(".") > email.indexOf("@")) {
-result.innerHTML = "Please input a valid email address to continue." };
-let Yay = "/signup/" + email;
-    fetch(Yay)
-        .then((response) => response.json())
+            function checkLastName(lastnameInput) {
+                if (lastnameInput.value.length < 2) {
+                    lastnameInput.focus();
+                    alert("Your name is too short:" + lastnameInput.value);
+                } else {
+                    lastnameInput.value = toProperCase(lastnameInput.value);
+                }
+                localStorage.setItem("lastname", lastnameInput.value);
+            }
 
-        .then((res) => {
-            result.innerHTML = "An email was sent to " + res.success + ". Please verify your email to begin quacking!"
-        });
-}
-</script>
-</body>
+             function checkAge(ageInput) {
+            if (ageInput.value < 5) {
+                ageInput.focus();
+                alert("Unfortunately, you must be older than 5 years old.:" + ageInput.value);
+            }
+            if (ageInput.value > 100) {
+                ageInput.focus();
+                alert("Unfortunately, you must be younger than 100 years old.:" + ageInput.value);
+            }
+        }
+        function checkPassword(passwordInput) {
+            if (passwordInput.value.length < 8) {
+                alert("Your password needs to be at least 8 digits long.")
+            }
+            if (passwordInput.value === passwordInput.value.toLowerCase() || passwordInput.value === passwordInput.value.toUpperCase()) {
+                alert("Your password needs to have mixed cases.");
+            }
+            let hasNumber = false
+            debugger;
+            for (let h = 0; h < passwordInput.value.length; h++) {
+                if (0 * passwordInput.value[h] === 0) {
+                    hasNumber = true;
+                    break;
+                }
+            }
+            if (!hasNumber) {
+                alert("Your password needs to have a number!")
+            }
+        }
+        </script>
+    </body>
 </html>
