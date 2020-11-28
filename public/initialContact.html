@@ -4,7 +4,7 @@
 <head>
 	<style>
 		body {
-			background-color: lightblue;
+			background-color: #9CC3D5FF;
 		}
 
 		h1 {
@@ -41,14 +41,14 @@
 <body>
 
 	<h1>Welcome to Quack!</h1>
-	<h4>Where 21st century quacking became a thing. </h4>
+	<h4>Where 21st century quacking became a thing.™ </h4>
 	<br>
 <br>
 <p>Please provide the information below to sign up!</p>
 <br>
 <br>
 <p>Enter your email address below.</p>
-<textarea id="email" rows="2" cols="10"></textarea>
+<textarea id="email" rows="5" cols="40"></textarea>
 <br>
 <br>
 <button type = "button" id = "quack" onclick="signUp()"> Get Quacking</button>
@@ -56,7 +56,6 @@
 <br>
 <div id="signupcomplete"></div>
 <script>
-
 function signUp(){
 let email = document.getElementById("email").value;
 let result = document.getElementById("signupcomplete");
@@ -71,6 +70,10 @@ if (email.indexOf("@") > 1 && email.lastIndexOf(".") > email.indexOf("@")) {
  } else {
 result.innerHTML = "Please input a valid email address to continue." 
 }
+}
+
+function makeLink(){
+
 }
 </script>
 </body>

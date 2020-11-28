@@ -1,0 +1,2 @@
+curl http://localhost:3000/signup/yayyy@gmail.com
+curl http://localhost:3000/api/sign-up -d {email:"yayyyy@gmail.com"}
