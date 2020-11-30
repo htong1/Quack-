@@ -1,2 +1,4 @@
 curl http://localhost:3000/signup/yayyy@gmail.com
 curl http://localhost:3000/api/sign-up -d {email:"yayyyy@gmail.com"}
+curl http://localhost:3000/api/sign-up -d '{username:"yayyyy@gmail.com"}' 
+curl -d '{"email": "y_kenny@hotmail.com", "username":"Yuman", "password": "shdfkshdka", "password_repeat": "shdfkshdka"}' -H "Content-Type: application/json" http://localhost:3000/api/sign-up
