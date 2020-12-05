@@ -1,4 +1,4 @@
-const express = require('express'); 
+const express = require('express');
 const sha1 = require("sha1");
 const sendmail = require('./lib/sendMail.js');
 const bodyParser = require('body-parser');
@@ -16,7 +16,7 @@ app.get("/verifyemail/:email", (req, res) => {
   let email = req.params.email;
   console.log(email);
   sendmail(email);
-  res.json({"success": email});
+  res.json({ "success": email });
 })
 
 const cors = require('cors');
@@ -29,3 +29,8 @@ const router = require('./routes/router.js');
 app.use('/api', router);
 // run server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+
+//Dj^NrZg98MEb6oaQ

@@ -23,24 +23,27 @@
         <br>
         <br>
         <p>
-        First name:
+       <!-- First name:
         <br />
-        <input type="text" name="First Name" onchange="checkFirstName(this)" />
-
+        <input type="text" id="FirstName" onchange="checkFirstName()" />
         <br />
         Last name:
         <br />
-        <input type="text" name="Last Name" onchange="checkLastName(this)" />
-        <br />
+        <input type="text" id="LastName" onchange="checkLastName()" />
+        <br />-->
+        Username:
+        <input type="text" id = "user" />
+        <br>
         Birthday (mm/dd/yy):
         <br />
-        <input type="date" name="birthday" onchange="checkBirthday(this)" />
-        <br />
+        <!--<input type="date" id="birthday" onchange="checkBirthday()" />
+        <br />-->
         Password :
         <br />
-        <input type="password" name="Password" onchange="checkPassword(this)" />
+        <input type="password" id="Password" />
         <script>
-            function checkFirstName(firstnameInput) {
+            /*function checkFirstName() {
+              let firtnameInput
                 if (firstnameInput.value.length < 2) {
                     firstnameInput.focus();
                     alert("Your name is too short:" + firstnameInput.value);
@@ -88,7 +91,24 @@
             if (!hasNumber) {
                 alert("Your password needs to have a number!")
             }
+        }*/
+
+        function gather(){
+          debugger;
+          let user = document.getElementById("user").value;
+          let pass = document.getElementById("Password").value;
+          let search = window.location.search;
+          let params = new URLSearchParams(search);
+          let yay = params.get("e");
+          let info = {
+            email:yay,
+            username:user,
+            password:pass
+          }
         }
         </script>
+         <br>
+         <br>
+        <button type = "button" onclick = "gather()"> get quacking </button>
     </body>
 </html>
