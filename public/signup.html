@@ -23,56 +23,65 @@
         <br>
         <br>
         <p>
-       <!-- First name:
-        <br />
-        <input type="text" id="FirstName" onchange="checkFirstName()" />
-        <br />
-        Last name:
-        <br />
-        <input type="text" id="LastName" onchange="checkLastName()" />
-        <br />-->
+        First name:
+		    <br>
+        <input type="text" name="First Name" onchange="checkFirstName(this)" />
+
+        <br> Last name:
+        <br>
+        <input type="text" name="Last Name" onchange="checkLastName(this)" />
+        <br>
+        <br>
         Username:
         <input type="text" id = "user" />
         <br>
         Birthday (mm/dd/yy):
         <br />
-        <!--<input type="date" id="birthday" onchange="checkBirthday()" />
-        <br />-->
-        Password :
+        <input type="date" id="birthday" onchange="checkBirthday()" />
         <br />
-        <input type="password" id="Password" />
+        Password:
+        <br />
+          <input type="password" name="Password" onchange="checkPassword(this)" />
         <script>
-            /*function checkFirstName() {
-              let firtnameInput
-                if (firstnameInput.value.length < 2) {
-                    firstnameInput.focus();
-                    alert("Your name is too short:" + firstnameInput.value);
-                } else {
-                    firstnameInput.value = toProperCase(firstnameInput.value);
-                }
-                localStorage.setItem("firstname", firstnameInput.value);
-            }
+           function checkFirstName(firstnameInput) {
 
-            function checkLastName(lastnameInput) {
-                if (lastnameInput.value.length < 2) {
-                    lastnameInput.focus();
-                    alert("Your name is too short:" + lastnameInput.value);
-                } else {
-                    lastnameInput.value = toProperCase(lastnameInput.value);
-                }
-                localStorage.setItem("lastname", lastnameInput.value);
+            if (firstnameInput.value.length < 2) {
+                firstnameInput.focus();
+                alert("Your name is too short:" + firstnameInput.value);
+            } else {
+                firstnameInput.value = toProperCase(firstnameInput.value);
             }
+            localStorage.setItem("firstname", firstnameInput.value)
+        }
 
-             function checkAge(ageInput) {
-            if (ageInput.value < 5) {
-                ageInput.focus();
-                alert("Unfortunately, you must be older than 5 years old.:" + ageInput.value);
+        function checkLastName(lastnameInput) {
+
+            if (lastnameInput.value.length < 2) {
+                lastnameInput.focus();
+                alert("Your name is too short:" + lastnameInput.value);
+            } else {
+                lastnameInput.value = toProperCase(lastnameInput.value);
             }
-            if (ageInput.value > 100) {
+            localStorage.setItem("lastname", lastnameInput.value)
+        }
+
+
+        function toProperCase(username) {
+            return username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
+        };
+
+             function checkAge() {
+            let ageInput = document.getelementById("birthday").value;
+            if (ageInput < 5) {
                 ageInput.focus();
-                alert("Unfortunately, you must be younger than 100 years old.:" + ageInput.value);
+                alert("Unfortunately, you must be older than 5 years old.:" + ageInput);
+            }
+            if (ageInput > 100) {
+                ageInput.focus();
+                alert("Unfortunately, you must be younger than 100 years old.:" + ageInput);
             }
         }
+        
         function checkPassword(passwordInput) {
             if (passwordInput.value.length < 8) {
                 alert("Your password needs to be at least 8 digits long.")
@@ -91,7 +100,8 @@
             if (!hasNumber) {
                 alert("Your password needs to have a number!")
             }
-        }*/
+        }
+
 
         function gather(){
           debugger;
