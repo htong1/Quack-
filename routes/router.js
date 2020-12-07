@@ -12,7 +12,7 @@ router.get('/secret-route', (req, res, next) => {
 
 router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
   db.query(
-    `SELECT * FROM users WHERE LOWER(username) = LOWER(${db.escape(
+    `SELECT * FROM Users WHERE LOWER(username) = LOWER(${db.escape(
       req.body.username
     )});`,
     (err, result) => {
@@ -30,7 +30,7 @@ router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
           } else {
             // has hashed pw => add to database
             db.query(
-              `INSERT INTO users (id, username, password, registered) VALUES ('${uureq.body.email}', ${db.escape(
+              `INSERT INTO Users (id, username, password, registered) VALUES ('${req.body.email}', ${db.escape(
                 req.body.username
               )}, ${db.escape(hash)}, now())`,
               (err, result) => {
@@ -54,7 +54,7 @@ router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   db.query(
-    `SELECT * FROM users WHERE username = ${db.escape(req.body.username)};`,
+    `SELECT * FROM Users WHERE username = ${db.escape(req.body.username)};`,
     (err, result) => {
       // user does not exists
       if (err) {
@@ -90,7 +90,7 @@ router.post('/login', (req, res, next) => {
               }
             );
             db.query(
-              `UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`
+              `UPDATE Users SET last_login = now() WHERE id = '${result[0].id}'`
             );
             return res.status(200).send({
               msg: 'Logged in!',
