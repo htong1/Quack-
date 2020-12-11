@@ -55,7 +55,7 @@ router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-  console.log("entering/logging in with" + req.body.username);
+  console.log("entering/logging in with " + req.body.username);
   console.log(req.body);
   db.query(
     `SELECT * FROM Users WHERE username = ${db.escape(req.body.username)};`,
