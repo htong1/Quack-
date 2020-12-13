@@ -90,7 +90,7 @@ router.post('/login', (req, res, next) => {
               userId: result[0].id
             },
               'SECRETKEY', {
-                expiresIn: '7d'
+                expiresIn: '1d'
               }
             );
             db.query(
