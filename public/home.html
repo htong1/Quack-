@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home! :D</title>
+<style>
+body {
+  background-color: #9CC3D5FF;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-family: monospace;
+}
+
+p {
+  font-family: monospace;
+  color:white;
+  font-size: 15px;
+  text-align:center;
+}
+</style>
+<script>
+  function message(){
+     let post = document.getElementById("post").value;
+     let info = {
+            message:post
+          }
+          fetch('/api/post-message', {
+            method: 'post',
+            headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+             },
+           body: JSON.stringify(info)
+          }).then(res=>res.json()).then(res => {
+            console.log(res);
+  }
+  </script>
+</head>
+
+<body>
+<h1>Home!:D</h1>
+<p>Welcome to your home!</p>
+<br>
+<br>
+<center>
+<textarea id = "post" rows = "10" cols = "70">Quack, quack, quack...</textarea>
+<br>
+<br>
+<button type = "button" id = "post" onclick = "post"> Quack!</button>
+</center>
+</body>
+</html>

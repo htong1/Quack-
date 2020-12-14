@@ -9,7 +9,13 @@ const userMiddleware = require('../middleware/users.js');
 
 router.get('/secret-route', userMiddleware.isLoggedIn, (req, res, next) => {
   console.log(req.userData);
-  res.send('This is the secret content. Only logged in users can see that!');
+  res.send('Welcome!' + req.userData.username + 'This is the secret content. Only logged in users can see that!');
+});
+
+router.post('/post-message', userMiddleware.isLoggedIn, (req, res, next) => {
+  console.log(req.userData.username);
+   console.log(req.body.message);
+  res.send('Welcome!' + req.userData.username + 'This is the secret content. Only logged in users can see that!');
 });
 
 router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
@@ -90,7 +96,7 @@ router.post('/login', (req, res, next) => {
               userId: result[0].id
             },
               'SECRETKEY', {
-                expiresIn: '1d'
+                expiresIn: '7d'
               }
             );
             db.query(

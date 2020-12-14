@@ -36,10 +36,10 @@
              },
            body: JSON.stringify(info)
           }).then(res=>res.json()).then(res => {
-           console.log(res);
+           console.log(res.token);
            let token = res.token;
            localStorage.setItem("token",token);
-           window.open("https://Quack.htong1.repl.co/feed.html", "_self")
+           window.open("https://Quack.htong1.repl.co/home.html", "_parent")
            });
 }
 	</script>
