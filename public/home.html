@@ -23,18 +23,21 @@ p {
 <script>
   function message(){
      let post = document.getElementById("post").value;
+     let tok = localStorage.getItem("token");
      let info = {
             message:post
           }
           fetch('/api/post-message', {
             method: 'post',
             headers: {
+            'Authorization': 'bearer ' + tok,
             'Accept': 'application/json, text/plain, */*',
             'Content-Type': 'application/json'
              },
            body: JSON.stringify(info)
           }).then(res=>res.json()).then(res => {
             console.log(res);
+  })
   }
   </script>
 </head>
@@ -48,7 +51,7 @@ p {
 <textarea id = "post" rows = "10" cols = "70">Quack, quack, quack...</textarea>
 <br>
 <br>
-<button type = "button" id = "post" onclick = "post"> Quack!</button>
+<button type = "button" id = "post" onclick = "message()"> Quack!</button>
 </center>
 </body>
 </html>

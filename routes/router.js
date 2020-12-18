@@ -10,12 +10,28 @@ const userMiddleware = require('../middleware/users.js');
 router.get('/secret-route', userMiddleware.isLoggedIn, (req, res, next) => {
   console.log(req.userData);
   res.send('Welcome!' + req.userData.username + 'This is the secret content. Only logged in users can see that!');
+
 });
 
 router.post('/post-message', userMiddleware.isLoggedIn, (req, res, next) => {
   console.log(req.userData.username);
-   console.log(req.body.message);
-  res.send('Welcome!' + req.userData.username + 'This is the secret content. Only logged in users can see that!');
+  console.log(req.body.message);
+     db.query(
+              `INSERT INTO Messages (author, message, posted_at) VALUES ('${req.userData.username}', ${db.escape(
+                req.body.message
+              )}, now())`,
+              (err, result) => {
+                if (err) {
+                  throw err;
+                  return res.status(400).send({
+                    msg: err
+                  });
+                }
+                return res.status(201).send({
+                  msg: 'Sent!'
+                });
+              }
+            );
 });
 
 router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
