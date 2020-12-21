@@ -19,3 +19,15 @@ curl http://localhost:3000/api/secret-route -H "authorization: bearer eyJhbGciOi
 curl http://localhost:3000/api/secret-route -H "authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlheTEiLCJ1c2VySWQiOiJ0aGVvZGRlYXJ0aGxpbmcxM0BnbWFpbC5jb20iLCJpYXQiOjE2MDc4MzU1NDMsImV4cCI6MTYwODQ0MDM0M30.LowgPcBd7JEdfIZ0OseiJMBvAfH_J9zWrWM6Ns_3KwQ"
 
 let decoded = jwt.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlheTEiLCJ1c2VySWQiOiJ0aGVvZGRlYXJ0aGxpbmcxM0BnbWFpbC5jb20iLCJpYXQiOjE2MDc5MTcyMTgsImV4cCI6MTYwODUyMjAxOH0.5fCSkzywPrSjxe9PD93V95CLXDv28-CFToUdrk07EXM", "SECRETKEY")
+
+const db = require('./lib/db.js');
+            db.query(
+              `SELECT * FROM Messages`,
+              (err, result) => {
+                if (err) {
+                  throw err;
+                }
+                console.log(result[0].message)
+              }
+            );
+          

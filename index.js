@@ -16,7 +16,7 @@ app.get("/verifyemail/:email", (req, res) => {
   let email = req.params.email;
   console.log(email);
   sendmail(email);
-  res.json({ "success": email });
+  res.json({ "success": email});
 })
 
 const cors = require('cors');

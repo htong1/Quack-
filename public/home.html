@@ -39,6 +39,24 @@ p {
             console.log(res);
   })
   }
+
+  function readMessages(){
+  let feed = document.getElementById("feed");
+  let tok = localStorage.getItem("token");
+  fetch('/api/read-message', {
+            method: 'get',
+            headers: {
+            'Authorization': 'bearer ' + tok,
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+             }
+          }).then(res=>res.json()).then(res => {
+            console.log("lengthhhh" + res.length);
+            for(let i = 0; i < res.length; i++){
+             feed.innerHTML = res[i].author + res[i].message;
+            }
+  })
+  }
   </script>
 </head>
 
@@ -48,10 +66,16 @@ p {
 <br>
 <br>
 <center>
-<textarea id = "post" rows = "10" cols = "70">Quack, quack, quack...</textarea>
+<textarea id = "post" rows = "10" cols = "70">Quack, quack, quack... ᕕ( ᐛ )ᕗ</textarea>
 <br>
 <br>
 <button type = "button" id = "post" onclick = "message()"> Quack!</button>
+<br>
+<br>
+<button type = "button" id = "read" onclick = "readMessages()"> Quack!</button>
+<br>
+<br>
+<div id = "feed"></div>
 </center>
 </body>
 </html>
