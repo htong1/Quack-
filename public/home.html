@@ -40,7 +40,7 @@ p {
   })
   }
 
-  function readMessages(){
+  setInterval(function readMessages(){
   let feed = document.getElementById("feed");
   let tok = localStorage.getItem("token");
   fetch('/api/read-message', {
@@ -52,11 +52,42 @@ p {
              }
           }).then(res=>res.json()).then(res => {
             console.log("lengthhhh" + res.length);
-            for(let i = 0; i < res.length; i++){
-             feed.innerHTML = res[i].author + res[i].message;
-            }
-  })
-  }
+             displayFeed(res, feed);
+  })}, 10000);
+
+  function displayFeed(res, feed) {
+    let tblHtml = `
+    <center>
+    <ol>`;
+    for (const k of res) {
+        tblHtml += createRow(k);
+    }
+    tblHtml += `</ol></center>`;
+    feed.innerHTML = tblHtml;
+}
+
+function createRow(k) {
+    debugger;
+    let time = new Date(k.posted_at);
+    let date = new Date(k.posted_at);
+    date = date.getTime();
+    let current = new Date();
+    current = current.getTime();
+    let age = current - date;
+    age = age/60000;
+    if(age <= 60){
+      age = Math.floor(age) + " minutes ago"
+      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <br>Posted at:${time} <br><p>Posted:</p> ${age}</li><br></center>`
+    } else if(age >= 60 && age < 1440) {
+       age = age/60;
+      age = Math.floor(age) + " hours ago"
+      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}</li><br></center>`
+    } else {
+       age = age/1440;
+      age = Math.floor(age) + " days ago"
+      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}</li><br></center>`
+    }
+}
   </script>
 </head>
 
@@ -70,9 +101,6 @@ p {
 <br>
 <br>
 <button type = "button" id = "post" onclick = "message()"> Quack!</button>
-<br>
-<br>
-<button type = "button" id = "read" onclick = "readMessages()"> Quack!</button>
 <br>
 <br>
 <div id = "feed"></div>
