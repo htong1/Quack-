@@ -46,6 +46,16 @@ router.post('/post-message', userMiddleware.isLoggedIn, (req, res, next) => {
             );
 });
 
+router.post('/like-message', userMiddleware.isLoggedIn, (req, res, next) => {
+  console.log(req.userData.username);
+  console.log(req.body.id);
+     db.query(
+           `UPDATE Messages 
+            SET post_likes = post_likes + 1
+            WHERE id = ${req.body.id}`
+            );
+});
+
 router.post('/sign-up', userMiddleware.validateRegister, (req, res, next) => {
   db.query(
     `SELECT * FROM Users WHERE LOWER(username) = LOWER(${db.escape(

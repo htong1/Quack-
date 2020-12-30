@@ -18,6 +18,7 @@ Project Outline
   J. POSTING
   K. Friend users
   L. Number of followers
+  M.user can log out
 
  System:
   A. validates a signed up user's identity (ex. by email)
