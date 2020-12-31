@@ -20,6 +20,10 @@
 			font-size: 15px;
 			text-align: center;
 		}
+
+    #logout{
+      float:right;
+    }
 	</style>
 	<script src="he.js">
 
@@ -82,16 +86,15 @@
   function displayFeed(res, feed) {
     let tblHtml = `
     <center>
-    <ol>`;
+    <div>`;
     for (const k of res) {
         tblHtml += createRow(k);
     }
-    tblHtml += `</ol></center>`;
+    tblHtml += `</div></center>`;
     feed.innerHTML = tblHtml;
 }
 
 function createRow(k) {
-    debugger;
     let time = new Date(k.posted_at);
     let date = new Date(k.posted_at);
     date = date.getTime();
@@ -101,24 +104,30 @@ function createRow(k) {
     age = age/60000;
     if(age <= 60){
       age = Math.floor(age) + " minutes ago"
-      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <br>Posted at:${time} <br><p>Posted:</p> ${age}</li><br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`
+      return `<b>${k.author}</b>:<center><br> ${k.message} <br>Posted at:${time} <br><p>Posted:</p> ${age}<br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`
     } else if(age >= 60 && age < 1440) {
        age = age/60;
       age = Math.floor(age) + " hours ago"
-      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}</li><br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`
+      return `<b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}<br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`
     } else {
        age = age/1440;
       age = Math.floor(age) + " days ago"
-      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}</li><br>
+      return `<b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}<br>
       <div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`
     }
+}
+
+function logout(){
+
 }
 	</script>
 </head>
 
 <body>
+<div id = "logout"> </div><button type = "button" id = "logout" onclick = "logout()"> Log Out!</button>
+<br>
 	<h1>Home!:D</h1>
-	<p>Welcome to your home!</p>&nbsp;&nbsp;<button type = "button" id = "logout" onclick = "logout()"> Log Out!</button>
+	<p>Welcome to your home!</p>
 <br>
 <br>
 <center>
