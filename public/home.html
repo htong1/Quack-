@@ -72,7 +72,9 @@
                     });
             }
 
-            setInterval(function readMessages() {
+            let othermsg = setInterval(readMessages, 3000);
+
+             function readMessages() {
                 let feed = document.getElementById("feed");
                 let tok = localStorage.getItem("token");
                 fetch("/api/read-message", {
@@ -88,7 +90,31 @@
                         console.log("lengthhhh" + res.length);
                         displayFeed(res, feed);
                     });
-            }, 3000);
+            }
+
+            function callyourMessages(){
+
+            }
+
+                let yourmsg = setInterval(readyourMessages, 3000);
+                
+                function readyourMessages() {
+                let feed = document.getElementById("feed");
+                let tok = localStorage.getItem("token");
+                fetch("/api/read-yourmessage", {
+                    method: "get",
+                    headers: {
+                        Authorization: "bearer " + tok,
+                        Accept: "application/json, text/plain, */*",
+                        "Content-Type": "application/json",
+                    },
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        displayFeed(res, feed);
+                    });
+            }
+
 
             function displayFeed(res, feed) {
                 let tblHtml = `
@@ -165,11 +191,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <div class="w3-cell-row">
 
-  <div class="w3-container w3-#9cc3d5ff w3-cell" onclick = "readMessages()">
+  <div class="w3-container w3-#9cc3d5ff w3-cell" onclick = "readMessages(); clearInterval(yourmsg)">
     <p>What's Quacking???</p>
   </div>
 
-  <div class="w3-container w3-#9cc3d5ff w3-cell">
+  <div class="w3-container w3-#9cc3d5ff w3-cell" onclick = "readyourMessages(); clearInterval(othermsg)">
     <p>Your Quacks</p>
   </div>
 
