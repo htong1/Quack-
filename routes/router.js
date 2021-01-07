@@ -14,13 +14,24 @@ router.get("/secret-route", userMiddleware.isLoggedIn, (req, res, next) => {
 router.get("/read-message", userMiddleware.isLoggedIn, (req, res, next) => {
   //console.log(req.userData);
   //Select * from Messages WHERE authorid in (SELECT followedId from User_follows WHERE followerId) =
-  db.query(`Select * from Messages WHERE authorid in (SELECT followedId from User_follows WHERE followerId = '${req.userData.userId}')`, (err, result) => {
+  db.query(`Select * from Messages WHERE authorid = '${req.userData.userId}' OR authorid in (SELECT followedId from User_follows WHERE followerId = '${req.userData.userId}')`, (err, result) => {
     if (err) {
       throw err;
     }
     res.json(result);
   })
 });
+
+router.get("/read-yourmessage", userMiddleware.isLoggedIn, (req, res, next) => {
+  //console.log(req.userData);
+  db.query(`Select * from Messages WHERE authorid = '${req.userData.userId}'`, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.json(result);
+  })
+});
+
 
 
 router.post("/post-message", userMiddleware.isLoggedIn, (req, res, next) => {
