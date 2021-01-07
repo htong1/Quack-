@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Home! :D</title>
-        <style>
-            body {
-                background-color: #9cc3d5ff;
-            }
 
-            h1 {
-                color: white;
-                text-align: center;
-                font-family: monospace;
-            }
+<head>
+	<title>Home! :D</title>
+	<style>
+		body {
+			background-color: #9cc3d5ff;
+		}
 
-            p {
-                font-family: monospace;
-                color: white;
-                font-size: 15px;
-                text-align: center;
-            }
+		h1 {
+			color: white;
+			text-align: center;
+			font-family: monospace;
+		}
 
-            #logout {
-                float: right;
-            }
-        </style>
-        <script src="he.js"></script>
-        <script>
-            function message() {
+		p {
+			font-family: monospace;
+			color: white;
+			font-size: 15px;
+			text-align: center;
+		}
+
+		#logout {
+			float: right;
+		}
+	</style>
+	<script src="he.js">
+
+	</script>
+	<script>
+		function message() {
                 let post = document.getElementById("post").value;
                 post = he.encode(post);
                 let tok = localStorage.getItem("token");
@@ -108,26 +111,51 @@
                 age = age / 60000;
                 if (age <= 60) {
                     age = Math.floor(age) + " minutes ago";
-                    return `<b>${k.author}</b>:<center><br> ${k.message} <br>Posted at:${time} <br><p>Posted:</p> ${age}<br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`;
+                    return `<b>${k.author}</b>: <span style="border-radius: 12px;width:400x;height:100px;border:1px solid;" id = "followbutton" onclick="follow('${k.authorid}')">Follow</span><center><br> ${k.message} <br>Posted at:${time} <br><p>Posted:</p> ${age}<br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`;
                 } else if (age >= 60 && age < 1440) {
                     age = age / 60;
                     age = Math.floor(age) + " hours ago";
-                    return `<b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}<br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`;
+                    return `<b>${k.author}</b>: <span style="border-radius: 12px;width:400px;height:100px;border:1px solid;" onclick="follow('${k.authorid}')">Follow</span><center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}<br><div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`;
                 } else {
                     age = age / 1440;
                     age = Math.floor(age) + " days ago";
-                    return `<b>${k.author}</b>:<center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}<br>
-      <div onclick="like(${k.id});">❤</div>${k.post_likes}</center>`;
+                    return `<b>${k.author}</b>: <span style="border-radius: 12px;width:400px;height:100px;border:1px solid;" onclick="follow('${k.authorid}')">Follow</span><center><br> ${k.message} <br><p>Posted at:</p>${time} <br><p>Posted:</p>${age}<br>
+      <div onclick="like(${k.id});">❤</div>${k.post_likes}<br></center>`;
                 }
             }
 
-            function logout() {}
-        </script>
-    </head>
+            //function logout() {}
 
-    <body>
-        <div id="logout"></div>
-        <button type="button" id="logout" onclick="logout()">Log Out!</button>
+      function follow(authorid){
+              let write = document.getElementById("write").innerHTML;              
+              let tok = localStorage.getItem("token");
+              let info = {
+                   followedId:authorid
+               };
+               fetch("/api/follow-user", {
+                  method: "post",
+                   headers: {
+                       Authorization: "bearer " + tok,
+                       Accept: "application/json, text/plain, */*",
+                       "Content-Type": "application/json",
+                   },
+                   body: JSON.stringify(info),
+               })
+                   .then((res) => res.json())
+                   .then((res) => {
+                       console.log(res);
+                   });
+           }
+
+           function write(){
+            
+           }
+	</script>
+</head>
+
+<body>
+	<div id="logout"></div>
+	<button type="button" id="logout" onclick="logout()">Log Out!</button>
         <br />
         <h1>Home!:D</h1>
         <p>Welcome to your home!</p>
@@ -141,6 +169,9 @@
             <br />
             <br />
             <div id="feed"></div>
+            <br>
+            <br>
+            <div id = "write"></div>
         </center>
     </body>
 </html>
